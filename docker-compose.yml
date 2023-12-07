@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+    container_name: therols_band_backend
+    environment:
+      - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
+      - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
+      - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
+    command: >
+      sh -c "
+      python manage.py makemigrations &&
+      python manage.py migrate &&
+      python manage.py createsuperuser --noinput &&
+      python manage.py runserver 0.0.0.0:86"
+    ports:
+      - "86:86"
+
