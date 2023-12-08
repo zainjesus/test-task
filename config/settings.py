@@ -60,6 +60,15 @@ CHANNEL_LAYERS = {
     },
 }
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('localhost', 6379)],  # Замените на ваш конфиг Redis
+#         },
+#     },
+# }
+
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [

@@ -27,21 +27,18 @@ class PostModelViewSetAPIView(ModelViewSet):
         post.themes.set(themes)
         post.save()
 
-        return Response(data={'message': 'Data received!',
-                              'movie': self.get_serializer(post).data},
-                        status=status.HTTP_201_CREATED)
-
-    def perform_create(self, serializer):
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
-            'post_group',
+            "post_group",
             {
-                'type': 'notify.post.published',
-                'message': 'Ваш пост опубликован',
+                'type': 'post_message',
+                'message': 'Пост опубликован',
             }
         )
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(data={'message': 'Data received!',
+                              'post': self.get_serializer(post).data},
+                        status=status.HTTP_201_CREATED)
 
 
 class CategoryModelViewSetAPIView(ModelViewSet):

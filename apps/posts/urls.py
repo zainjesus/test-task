@@ -14,5 +14,5 @@ router.register(r'themes', ThemeModelViewSetAPIView, basename='theme-crud')
 router.register(r'comments', CommentModelViewSetAPIView, basename='comment-crud')
 
 urlpatterns = router.urls + [
-    path('ws/notifications/', include(routing.websocket_urlpatterns)),
+    path('', include(routing.websocket_urlpatterns)),
 ]
